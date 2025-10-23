@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [displayText, setDisplayText] = useState("");
+  const [navActive, setNavActive] = useState(false);
   const text = "luv nim mak2";
 
   useEffect(() => {
@@ -10,23 +11,19 @@ export default function Home() {
 
     const typewriter = () => {
       if (!isCurrentlyDeleting && index < text.length) {
-        // Typing
         setDisplayText(text.substring(0, index + 1));
         index++;
-        setTimeout(typewriter, 100); // Speed of typing
+        setTimeout(typewriter, 100);
       } else if (isCurrentlyDeleting && index > 0) {
-        // Deleting
         setDisplayText(text.substring(0, index - 1));
         index--;
-        setTimeout(typewriter, 50); // Speed of deleting
+        setTimeout(typewriter, 50);
       } else if (index === text.length) {
-        // Pause before deleting
         isCurrentlyDeleting = true;
-        setTimeout(typewriter, 2000); // Pause duration
+        setTimeout(typewriter, 2000);
       } else if (index === 0 && isCurrentlyDeleting) {
-        // Pause before typing again
         isCurrentlyDeleting = false;
-        setTimeout(typewriter, 500); // Pause before restarting
+        setTimeout(typewriter, 500);
       }
     };
 
@@ -34,78 +31,121 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
-        {/* Profile Card */}
-        <div className="bg-card border border-border rounded-3xl p-10 sm:p-12 backdrop-blur-md shadow-2xl transition-all duration-300 hover:border-accent hover:shadow-lg hover:shadow-accent/15">
-          {/* Profile Image */}
-          <div className="relative w-40 h-40 mx-auto mb-8 cursor-pointer group perspective">
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      {/* Header */}
+      <header className="fixed top-0 left-0 w-full px-9 py-5 flex justify-between items-center z-50 bg-black/80 backdrop-blur">
+        <a href="#" className="text-4xl font-bold text-red-600 hover:scale-110 transition-transform duration-500">
+          Nongnice
+        </a>
+
+        <nav className="hidden md:flex gap-8">
+          <a href="#" className="text-lg font-medium text-white hover:text-red-600 border-b-4 border-transparent hover:border-red-600 transition-all duration-300 pb-1">
+            Home
+          </a>
+          <a href="#" className="text-lg font-medium text-white hover:text-red-600 border-b-4 border-transparent hover:border-red-600 transition-all duration-300 pb-1">
+            About
+          </a>
+          <a href="#" className="text-lg font-medium text-white hover:text-red-600 border-b-4 border-transparent hover:border-red-600 transition-all duration-300 pb-1">
+            Contact
+          </a>
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setNavActive(!navActive)}
+          className="md:hidden text-2xl text-white hover:text-red-600 transition-colors"
+        >
+          <i className="fas fa-bars" />
+        </button>
+      </header>
+
+      {/* Mobile Navigation */}
+      {navActive && (
+        <nav className="fixed top-20 right-0 w-2/5 bg-gray-900 border-l-4 border-red-600 border-b-4 border-red-600 rounded-bl-3xl p-6 z-40 md:hidden">
+          <a href="#" className="block text-xl font-medium text-white hover:text-red-600 my-6 transition-colors">
+            Home
+          </a>
+          <a href="#" className="block text-xl font-medium text-white hover:text-red-600 my-6 transition-colors">
+            About
+          </a>
+          <a href="#" className="block text-xl font-medium text-white hover:text-red-600 my-6 transition-colors">
+            Contact
+          </a>
+        </nav>
+      )}
+
+      {/* Home Section */}
+      <section className="min-h-screen flex justify-center items-center gap-32 px-9 pt-32 pb-20 md:pt-20">
+        {/* Profile Image */}
+        <div className="hidden lg:block flex-shrink-0">
+          <img
+            src="https://avatars.pfptown.com/123/dark-anime-pfp-5064.png"
+            alt="Nongnice"
+            className="w-80 h-80 rounded-full shadow-2xl shadow-red-600 cursor-pointer hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 max-w-2xl">
+          {/* Mobile Profile Image */}
+          <div className="lg:hidden mb-8 flex justify-center">
             <img
-              src="https://api.dicebear.com/6.x/personas/svg?seed=NiceGuy"
-              alt="Nongnice Profile"
-              className="w-full h-full rounded-full border-4 border-accent object-cover transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-accent/50"
+              src="https://avatars.pfptown.com/123/dark-anime-pfp-5064.png"
+              alt="Nongnice"
+              className="w-64 h-64 rounded-full shadow-2xl shadow-red-600 cursor-pointer hover:scale-105 transition-transform duration-300"
             />
-            {/* Glow effect on hover */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full rounded-full bg-gradient-to-r from-accent/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300 pointer-events-none" />
           </div>
 
-          {/* Name */}
-          <h1 className="text-4xl sm:text-5xl font-bold text-center mb-3 bg-gradient-to-r from-accent via-purple-400 to-pink-400 bg-clip-text text-transparent">
-            Nongnice
+          {/* Main Heading */}
+          <h1 className="text-6xl md:text-7xl font-bold mb-4 leading-tight">
+            Hi, It's <span className="text-red-600">Nongnice</span>
           </h1>
 
-          {/* Typewriter Text */}
-          <div className="text-center mb-8 min-h-8">
-            <div className="font-mono text-lg sm:text-xl text-accent font-medium tracking-widest">
+          {/* Typing Text */}
+          <h3 className="text-4xl md:text-5xl font-bold mb-6 min-h-20">
+            I'm a <span className="text-red-600 relative inline-block">
               {displayText}
-              <span className="ml-1 animate-blink">|</span>
-            </div>
-          </div>
+              <span className="absolute -right-1 top-0 h-full border-l-4 border-red-600 animate-pulse" />
+            </span>
+          </h3>
 
-          {/* Social Links */}
-          <div className="flex gap-5 justify-center mb-8 flex-wrap">
-            {/* Instagram */}
+          {/* Description */}
+          <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
+            Just some guy with internet access. Passionate about connecting with people and sharing moments that matter.
+          </p>
+
+          {/* Social Icons */}
+          <div className="flex gap-6 mb-8 flex-wrap">
             <a
               href="https://www.instagram.com/_.nnxceqaz?igsh=ZmQ3OXNmNXNsZzAz&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 flex items-center justify-center border-2 border-border rounded-xl text-foreground transition-all duration-300 bg-card/40 hover:border-accent hover:text-accent hover:bg-accent/10 hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/20"
-              title="Instagram"
+              className="w-16 h-16 flex items-center justify-center border-2 border-red-600 text-red-600 rounded-full text-2xl hover:bg-red-600 hover:text-black hover:scale-125 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-red-600/50"
             >
-              <i className="fab fa-instagram text-xl" />
+              <i className="fab fa-instagram" />
             </a>
 
-            {/* Discord */}
             <a
               href="https://discord.com/users/877365725814206534"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 flex items-center justify-center border-2 border-border rounded-xl text-foreground transition-all duration-300 bg-card/40 hover:border-[#5865f2] hover:text-[#5865f2] hover:bg-[#5865f2]/10 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#5865f2]/20"
-              title="Discord"
+              className="w-16 h-16 flex items-center justify-center border-2 border-red-600 text-red-600 rounded-full text-2xl hover:bg-red-600 hover:text-black hover:scale-125 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-red-600/50"
             >
-              <i className="fab fa-discord text-xl" />
+              <i className="fab fa-discord" />
             </a>
           </div>
 
-          {/* Spotify Section */}
-          <div className="mt-8 pt-8 border-t border-border">
-            <span className="block text-xs text-muted-foreground uppercase tracking-widest mb-4 text-center">
-              Now Playing
-            </span>
-            <div className="rounded-2xl overflow-hidden shadow-lg bg-black/40">
-              <iframe
-                src="https://open.spotify.com/embed/track/7qiZfU4dY1lsylvNFutFtA?utm_source=generator"
-                width="100%"
-                height="352"
-                frameBorder="0"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-                className="w-full"
-              />
-            </div>
-          </div>
+          {/* CTA Button */}
+          <a
+            href="https://www.instagram.com/_.nnxceqaz?igsh=ZmQ3OXNmNXNsZzAz&utm_source=qr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-8 py-4 bg-black border-2 border-red-600 text-red-600 text-lg font-bold rounded-full hover:bg-red-600 hover:text-black hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-red-600/50"
+          >
+            Follow Me
+          </a>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
