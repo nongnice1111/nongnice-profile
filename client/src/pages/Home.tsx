@@ -9,7 +9,7 @@ export default function Home() {
   useEffect(() => {
     let index = 0;
     let isCurrentlyDeleting = false;
-    const text = "lluk nim";
+    const text = "luv nim mak2";
 
     const typewriter = () => {
       if (!isCurrentlyDeleting && index < text.length) {
