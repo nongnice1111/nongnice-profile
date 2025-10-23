@@ -9,7 +9,7 @@ export default function Home() {
   useEffect(() => {
     let index = 0;
     let isCurrentlyDeleting = false;
-    const text = "luv nim mak2";
+    const text = "lluk nim";
 
     const typewriter = () => {
       if (!isCurrentlyDeleting && index < text.length) {
@@ -83,14 +83,17 @@ export default function Home() {
           />
         </div>
 
-        {/* Typewriter Text */}
+        {/* Name and Typewriter Text */}
         <div className="mb-8 md:mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold">
-            I'm a <span className="text-red-600 relative inline-block">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+            <span className="text-red-600">Nongnice</span>
+          </h1>
+          <h2 className="text-3xl md:text-5xl font-bold">
+            <span className="text-red-600 relative inline-block">
               {displayText}
               <span className="absolute -right-1 top-0 h-full border-l-4 border-red-600 animate-pulse" />
             </span>
-          </h1>
+          </h2>
         </div>
 
         {/* Social Icons */}
